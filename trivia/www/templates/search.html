@@ -1,0 +1,52 @@
+<ion-view  view-title="TRIVIA">
+  <ion-content>
+     <div align="center" id="log" ng-hide="formvisibility">
+
+     <form  id="frmlog" name="form">
+      <h2 align="center"><u>NOMBRE DEL JUGADOR</u></h2>
+          
+          <input type="text" ng-model="login.usuario">
+   
+       
+          <button  class="button button-block button-positive" ng-click="login()">COMENZAR</button>
+      
+    </form>
+    </div>
+  <div id="preg" align="center" ng-hide="ocPuntajes">
+       <h2><u> ULTIMOS PUNTAJES</u></h2>     	 
+   <ion-list >
+   <ion-item ng-repeat="puntaje in puntajes ">
+   <h2><u>SCORE:</u>{{puntaje}}</h2>
+   </ion-item>
+    </ion-list> 	 
+    
+    </div>
+    <div id="preg" ng-show="preguntas" >
+    
+    <div ng-hide="preg1" >
+     <label for="pregunta1" align="center" ><h2><u>{{pregunta1}}</u></h2></label>
+         <button class="button button-block  button-positive" ng-click="respuesta(0)" >{{resp0}}</button>
+         <button class="button button-block button-positive" ng-click="respuesta(1)" >{{resp1}}</button>
+         <button class="button button-block button-positive" ng-click="respuesta(2)" >{{resp2}}</button>                    
+    </div>
+    <div ng-hide="preg2">
+      <label for="pregunta2" align="center"><h2>{{pregunta2}}</h2></label>
+      <button class="button button-block   button-positive" ng-click="respuesta(4)">{{resp4}}</button > 
+      <button class="button button-block  button-positive" ng-click="respuesta(5)" >{{resp5}}</button>
+      <button class="button button-block  button-positive" ng-click="respuesta(3)">{{resp3}}</button >
+   </div> 
+   <div ng-hide="preg3" >
+       <label for="pregunta3" align="center"><h2>{{pregunta3}}</h2></label>
+     <button class="button button-block  button-positive" ng-click="respuesta(8)">{{resp8}}</button>
+     <button class="button button-block  button-positive" ng-click="respuesta(7)">{{resp7}}</button>
+      <button class="button button-block  button-positive" ng-click="respuesta(6)">{{resp6}}</button >
+  </div >
+            <div align="center" style="padding-top:10px; ">
+
+            <button ng-hide="btnScore" class="button button-block button-positive" ng-click="score()">MOSTRAR RESULTADOS</button> 
+            <br/>
+            <button ng-hide="btnreset" class="button button-block button-positive" ng-click="reset()">REINTENTAR</button>
+         </div>
+  </div>
+  </ion-content>
+</ion-view>

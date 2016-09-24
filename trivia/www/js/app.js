@@ -54,6 +54,15 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase','ngCordova'
       }
     }
   })
+    .state('app.preguntasYrespuestas', {
+    url: '/preguntasYrespuestas/:param',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/preguntasYrespuestas.html',
+        controller:'archivoCtrl'
+      }
+    }
+  })
 
   .state('app.browse', {
       url: '/browse/:score',

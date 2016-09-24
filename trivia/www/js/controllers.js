@@ -55,34 +55,37 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('logCtrl', function($scope,$stateParams,$state,$firebaseObject,$window,$timeout){
-      
- 
+.controller('logCtrl', function($scope,$stateParams,$state,$firebaseObject,$window,$timeout,$cordovaFile,$cordovaNativeAudio,$cordovaVibration){
+      var arrayPregYres=[];
      var ref = new Firebase("https://scoretrivia.firebaseio.com/");
-     $scope.puntajes=$firebaseObject(ref);
-        console.log($scope.puntajes);
+      $scope.puntajes=$firebaseObject(ref);
+    //    console.log($scope.puntajes);
   
 
       var contador=0;
    $scope.login=function(){
-     //    $cordovaNativeAudio
-     // .preloadComplex('correcto', 'sonidos/correcto.mp3', 1, 1)
-     // .then(function (msg) {
-     //   console.log(msg);
-     // }, function (error) {
-     //   console.error(error);
-     // });
-     //  $cordovaNativeAudio
-     // .preloadComplex('incorrecto', 'sonidos/incorrecto.mp3', 1, 1)
-     // .then(function (msg) {
-     //   console.log(msg);
-     // }, function (error) {
-     //   console.error(error);
-     // });
+       try{
+        $cordovaNativeAudio
+     .preloadComplex('correcto', 'sonidos/correcto.mp3', 1, 1)
+     .then(function (msg) {
+       console.log(msg);
+     }, function (error) {
+       console.error(error);
+     });
+      $cordovaNativeAudio
+     .preloadComplex('incorrecto', 'sonidos/incorrecto.mp3', 1, 1)
+     .then(function (msg) {
+       console.log(msg);
+     }, function (error) {
+       console.error(error);
+     });
+   } catch(ex){
+      alert(ex);
+   }
     $scope.pregunta1='¿En que año finalizo la 2da guerra mundial?';
     $scope.resp0='1940';
     $scope.resp1='1955';
-    // $scope.resp2='1945';
+     $scope.resp2='1945';
    
     $scope.pregunta2='¿Que son los quarks?';
     $scope.resp3='Un grupo de protones con carga neutra';
@@ -120,10 +123,10 @@ angular.module('starter.controllers', [])
        $scope.preg1=true;
     $scope.preg2=false;
     console.log($scope.pregunta1);
-    ref.push($scope.pregunta1+"--"+$scope.resp0);
-     //  $cordovaNativeAudio.play('incorrecto');
-     //  $cordovaVibration.vibrate(300);
-     // $cordovaVibration.vibrate(500);
+    arrayPregYres.push($scope.pregunta1+"--"+$scope.resp0);
+       $cordovaNativeAudio.play('incorrecto');
+       $cordovaVibration.vibrate(300);
+       $cordovaVibration.vibrate(500);
         $scope.res1=true;
        $scope.res2=true;
        $scope.preg1=true;
@@ -134,9 +137,10 @@ angular.module('starter.controllers', [])
        $scope.res2=true;
    $scope.preg1=true;    
      $scope.preg2=false;
-    // $cordovaNativeAudio.play('incorrecto');
-    //  $cordovaVibration.vibrate(100);
-    //   $cordovaVibration.vibrate(100);     
+     arrayPregYres.push($scope.pregunta1+"--"+$scope.resp1);
+     $cordovaNativeAudio.play('incorrecto');
+      $cordovaVibration.vibrate(100);
+      $cordovaVibration.vibrate(100);     
       }
       if(res==2){
        $scope.res1=true;
@@ -144,8 +148,9 @@ angular.module('starter.controllers', [])
     $scope.preg1=true;
      $scope.preg2=false;
      contador+=10;
-   // $cordovaNativeAudio.play('correcto');  
-   //   $cordovaVibration.vibrate(100); 
+     arrayPregYres.push($scope.pregunta1+"--"+$scope.resp2);
+    $cordovaNativeAudio.play('correcto');  
+      $cordovaVibration.vibrate(100); 
       }
       
   if(res==3){
@@ -153,18 +158,22 @@ angular.module('starter.controllers', [])
        $scope.res5=true;
        $scope.preg2=true;
        $scope.preg3=false;
-    // $cordovaNativeAudio.play('incorrecto');    
-    // $cordovaVibration.vibrate(100);
-    //  $cordovaVibration.vibrate(100);    
+     $cordovaNativeAudio.play('incorrecto');    
+     $cordovaVibration.vibrate(100);
+     $cordovaVibration.vibrate(100);    
+    arrayPregYres.push($scope.pregunta2+"--"+$scope.resp3);
+    alert(arrayPregYres);
+    
       } 
       if(res==4){
        $scope.res3=true;
        $scope.res5=true;
       $scope.preg2=true;
       $scope.preg3=false;
-     // $cordovaNativeAudio.play('incorrecto');  
-     //   $cordovaVibration.vibrate(100);
-     //  $cordovaVibration.vibrate(100);
+      arrayPregYres.push($scope.pregunta2+"--"+$scope.resp4);
+      $cordovaNativeAudio.play('incorrecto');  
+      $cordovaVibration.vibrate(100);
+      $cordovaVibration.vibrate(100);
 
       }
       if(res==5){
@@ -173,8 +182,9 @@ angular.module('starter.controllers', [])
        contador+=10;
      $scope.preg2=true;
       $scope.preg3=false;
-      // $cordovaNativeAudio.play('correcto');
-      //  $cordovaVibration.vibrate(100);
+      arrayPregYres.push($scope.pregunta2+"--"+$scope.resp5);
+      $cordovaNativeAudio.play('correcto');
+      $cordovaVibration.vibrate(100);
 
       }
       
@@ -183,9 +193,10 @@ angular.module('starter.controllers', [])
        $scope.res8=true;
        $scope.preg3=true;
         $scope.btnScore=false;
-      // $cordovaNativeAudio.play('incorrecto');   
-      //   $cordovaVibration.vibrate(100);
-      //   $cordovaVibration.vibrate(100);
+        arrayPregYres.push($scope.pregunta3+"--"+$scope.resp6);
+        $cordovaNativeAudio.play('incorrecto');   
+         $cordovaVibration.vibrate(100);
+         $cordovaVibration.vibrate(100);
 
       } 
       if(res==7){
@@ -193,9 +204,10 @@ angular.module('starter.controllers', [])
        $scope.res8=true;
       $scope.preg3=true;
       $scope.btnScore=false;
-      // $cordovaNativeAudio.play('incorrecto'); 
-      //  $cordovaVibration.vibrate(100);
-      // $cordovaVibration.vibrate(100);
+      arrayPregYres.push($scope.pregunta3+"--"+$scope.resp7);
+       $cordovaNativeAudio.play('incorrecto'); 
+        $cordovaVibration.vibrate(100);
+       $cordovaVibration.vibrate(100);
       }
       if(res==8){
        $scope.res7=true;
@@ -203,8 +215,9 @@ angular.module('starter.controllers', [])
         contador+=10;
        $scope.preg3=true;
        $scope.btnScore=false;
-      // $cordovaNativeAudio.play('correcto');
-      //  $cordovaVibration.vibrate(100);
+       arrayPregYres.push($scope.pregunta3+"--"+$scope.resp8);
+       $cordovaNativeAudio.play('correcto');
+       $cordovaVibration.vibrate(100);
       }
      console.log("Score="+contador);
    
@@ -214,9 +227,31 @@ angular.module('starter.controllers', [])
    };
      var flag;
    $scope.score=function(){
+
+    var arrayJSON=JSON.stringify(arrayPregYres);
+    
+   try{
+       $cordovaFile.createFile(cordova.file.externalApplicationStorageDirectory, "trivia.txt", true)
+      .then(function (success) {
+        // success
+      }, function (error) {
+        // error
+      });
+       $cordovaFile.writeFile(cordova.file.externalApplicationStorageDirectory, "trivia.txt", arrayJSON,true)
+      .then(function (success) {
+        
+      }, function (error) {
+        // error
+      });
+     
+
+      }
+      catch(ex){
+        console.log(ex);
+      }
+
      if(contador>0 && flag!=1){
-     console.log(contador);
-     ref.push(contador);
+       ref.push(contador);   
     flag=1;
   $state.go('app.browse',{score:contador});
     }
@@ -228,8 +263,27 @@ angular.module('starter.controllers', [])
      };
     
   })
-.controller('browseCtrl', function($scope,$state){
+.controller('browseCtrl', function($scope,$state,$cordovaFile){
+     var array=[];
+    $scope.archivo=function(){ 
+     try{
+      $cordovaFile.readAsText(cordova.file.externalApplicationStorageDirectory, "trivia.txt")
+      .then(function (success) {
+       array=JSON.parse(success);  
+       $state.go('app.preguntasYrespuestas',{param:array});
+        }, function (error) {
+        alert("error");
+      });
+      
+
+    }
+    catch(ex){
+       console.log(ex);
+    }
+   };
+
   $scope.score= $state.params.score;
+
    $scope.resetear=function(){
   document.location.href='index.html';
 };
@@ -238,6 +292,21 @@ angular.module('starter.controllers', [])
 
   };
 
+})
+.controller('archivoCtrl', function($scope,$state){
+    var arrayArchivo=[ 
+     ];
+
+   //  $scope.listCanSwipe=true;
+   // $scope.pYg="PREGUNTAS Y RESPUESTAS=";
+    arrayArchivo=$state.params.param.split(",");
+
+     $scope.datos=arrayArchivo;
+  //  alert($scope.datos);
+   // for( var i=0;i<arrayArchivo.length ;i++){
+    //  $scope.pYg+=arrayArchivo[i]+"//";
+  // } 
+    
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
